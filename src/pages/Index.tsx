@@ -1,9 +1,11 @@
 import Header from '@/components/Header';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+      <Breadcrumbs items={[]} />
       
       <main className="container mx-auto px-4 py-12">
         <div className="text-center max-w-4xl mx-auto">
