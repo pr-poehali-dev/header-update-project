@@ -1,13 +1,19 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import Icon from '@/components/ui/icon';
 import { useState } from 'react';
 
 const Header = () => {
-  const [activeSection, setActiveSection] = useState('Главная');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  const mainNavItems = [
-    'Главная',
+  const menuItems = [
     'О компании', 
     'Тарифы',
     'Услуги',
@@ -52,31 +58,45 @@ const Header = () => {
 
       <div className="bg-white border-b border-gray-200 py-3 px-4">
         <div className="container mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[hsl(var(--green-header))] rounded flex items-center justify-center">
-              <span className="text-white font-bold text-lg">Р</span>
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="font-bold text-xl text-[hsl(var(--green-header))]">РОСЛЕКС</span>
-              <span className="text-[10px] text-gray-600">Торговая организация</span>
+          <div className="flex items-center gap-4">
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-9 w-9">
+                  <Icon name="Menu" size={20} />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[300px]">
+                <SheetHeader>
+                  <SheetTitle className="text-[hsl(var(--green-header))]">Меню</SheetTitle>
+                </SheetHeader>
+                <nav className="flex flex-col gap-1 mt-6">
+                  {menuItems.map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="px-4 py-3 text-left text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-[hsl(var(--green-header))] rounded transition-colors"
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
+
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-[hsl(var(--green-header))] rounded flex items-center justify-center">
+                <span className="text-white font-bold text-lg">Р</span>
+              </div>
+              <div className="flex flex-col leading-tight">
+                <span className="font-bold text-xl text-[hsl(var(--green-header))]">РОСЛЕКС</span>
+                <span className="text-[10px] text-gray-600">Торговая организация</span>
+              </div>
             </div>
           </div>
 
-          <nav className="flex items-center gap-1">
-            {mainNavItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => setActiveSection(item)}
-                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
-                  activeSection === item
-                    ? 'text-[hsl(var(--green-header))] border-b-2 border-[hsl(var(--green-header))]'
-                    : 'text-gray-700 hover:text-[hsl(var(--green-header))]'
-                }`}
-              >
-                {item.toUpperCase()}
-              </button>
-            ))}
-          </nav>
+          <button className="px-4 py-1.5 text-sm font-medium text-[hsl(var(--green-header))] border-b-2 border-[hsl(var(--green-header))]">
+            ГЛАВНАЯ
+          </button>
 
           <div className="flex items-center gap-2 min-w-[300px]">
             <div className="relative flex-1">
