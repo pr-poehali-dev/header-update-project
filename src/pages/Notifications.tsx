@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import Footer from '@/components/Footer';
 import Icon from '@/components/ui/icon';
 
 interface NotificationItem {
@@ -107,6 +108,8 @@ const Notifications = () => {
           </div>
         </div>
       </main>
+      
+      <Footer />
     </div>
   );
 };
